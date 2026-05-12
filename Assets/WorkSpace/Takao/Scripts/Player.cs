@@ -34,7 +34,6 @@ public class Player : MonoBehaviour
     public void Kick()
     {
         m_spriteRenderer.sprite = m_spriteAfter;
-        transform.Translate(0.0f, 0.1f, 0f);
     }
 
 }

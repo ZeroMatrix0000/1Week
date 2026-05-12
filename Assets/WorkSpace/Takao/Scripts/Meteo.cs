@@ -3,25 +3,32 @@ using UnityEngine;
 // 隕石
 public class Meteo : MonoBehaviour
 {
+
     /* 列挙型 */
 
-    enum State
+    private enum State
     {
         Idle,
         Kicked,
         Stopped
     }
 
+
     /* 定数 */
 
     private static readonly float ACCELERATION = 2.0f;
 
+
     /* インスペクター */
 
     // 蹴る前に表示するオブジェクト
-    [SerializeField] private GameObject m_objectBefore;
+    [SerializeField] private Sprite m_spriteBefore;
     // 蹴ったあとに表示するオブジェクト
-    [SerializeField] private GameObject m_objectAfter;
+    [SerializeField] private Sprite m_spriteAfter;
+
+    // 子オブジェクトのスプライトレンダラー
+    [SerializeField] private SpriteRenderer m_spriteRenderer;
+
 
     /* メンバ変数 */
 
@@ -31,15 +38,12 @@ public class Meteo : MonoBehaviour
     // 速度
     float m_velocity;
 
+
     /* メンバ関数 */
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // 蹴る前の画像を表示
-        m_objectBefore.SetActive(true);
-        m_objectAfter.SetActive(false);
-
         m_state = State.Idle;
         m_velocity = 0f;
     }
@@ -65,9 +69,8 @@ public class Meteo : MonoBehaviour
     // 蹴られる
     public void Kicked(float velocity)
     {
-        // 蹴ったあとの画像を表示
-        m_objectBefore.SetActive(false);
-        m_objectAfter.SetActive(true);
+        // 蹴ったあとの画像に変更
+        m_spriteRenderer.sprite = m_spriteAfter;
 
         m_velocity = velocity;
         m_state = State.Kicked;
@@ -76,10 +79,12 @@ public class Meteo : MonoBehaviour
     // 止める
     private void Stop()
     {
-        // 蹴る前の画像を表示
-        m_objectBefore.SetActive(true);
-        m_objectAfter.SetActive(false);
+        // 蹴る前の画像に変更
+        m_spriteRenderer.sprite = m_spriteBefore;
 
         m_state = State.Stopped;
     }
+
+    // 隕石が止まったか
+    public bool IsStopped() { return m_state == State.Stopped; }
 }
