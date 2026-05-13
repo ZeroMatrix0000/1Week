@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -25,8 +23,8 @@ public class PowerGauge : MonoBehaviour
     void Update()
     {
 
-        // タイマーがゼロになったら
-        if (m_shouTimer.GetZeroCount())
+        // タイマーが非アクティブなら
+        if (!m_shouTimer.IsActive())
         {
             return;
         }
@@ -39,11 +37,11 @@ public class PowerGauge : MonoBehaviour
 
         }
 
-        
+
     }
-   
-  
+
+
 
     // パワーの取得
-    public int GetPower() {  return m_power; }
+    public int GetPower() { return m_power; }
 }

@@ -87,4 +87,12 @@ public class Meteo : MonoBehaviour
 
     // 隕石が止まったか
     public bool IsStopped() { return m_state == State.Stopped; }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (m_state == State.Kicked && collision.CompareTag("Planet"))
+        {
+            Destroy(collision.gameObject);
+        }
+    }
 }

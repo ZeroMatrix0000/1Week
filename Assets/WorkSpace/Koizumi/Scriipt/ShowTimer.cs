@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 // TextMeshProUGUIコンポーネントが必須であることを指定
 [RequireComponent(typeof(TextMeshProUGUI))]
@@ -11,18 +11,27 @@ public class ShowTimer : MonoBehaviour
     public string m_strFormat;
     // 経過時間を管理するGameTimerスクリプトの参照
     public GameTimer m_gameTimer;
-    
+
     // テキスト表示用のTextMeshProUGUIコンポーネント
     private TextMeshProUGUI m_txt;
 
     // 0になったかの判定
-    bool m_isZero = false;
+    //bool m_isZero = false;
+
+
+    // 有効かどうか
+    bool m_isActive;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // 同じGameObjectのTextMeshProUGUIコンポーネントを取得
         m_txt = GetComponent<TextMeshProUGUI>();
+
+
+        //m_isZero = false;
+        m_isActive = false;
     }
 
     // Update is called once per frame
@@ -33,11 +42,22 @@ public class ShowTimer : MonoBehaviour
         // フォーマットに従って残り時間をテキストに反映
         m_txt.text = string.Format(m_strFormat, fShowTime);
 
-        if(fShowTime <= 0f )
+        if (fShowTime <= 0f)
         {
-            m_isZero = true;
+            //m_isZero = true;
+            m_isActive = false;
         }
     }
 
-    public bool GetZeroCount() { return m_isZero; }
+    //public bool GetZeroCount() { return m_isZero; }
+
+
+    // アクティブかどうか
+    public bool IsActive() { return m_isActive; }
+
+    // アフティ部にする
+    public void Activate()
+    {
+        m_isActive = true;
+    }
 }

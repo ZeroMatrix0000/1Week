@@ -23,6 +23,10 @@ public class GamePlayScene : MonoBehaviour
     [SerializeField] private Player m_player;
     // 隕石
     [SerializeField] private Meteo m_meteo;
+    // 惑星
+    [SerializeField] private planet[] m_planets;
+    // タイマー
+    [SerializeField] private ShowTimer m_showTimer;
 
     /* メンバ変数 */
 
@@ -34,7 +38,8 @@ public class GamePlayScene : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_state = State.Kick;
+        m_state = State.Charge;
+        m_showTimer.Activate();
     }
 
     // Update is called once per frame
@@ -46,6 +51,7 @@ public class GamePlayScene : MonoBehaviour
             case State.CountDown:
                 break;
             case State.Charge:
+                UpdateCharge();
                 break;
             case State.Kick:
                 UpdateKick();
@@ -61,6 +67,16 @@ public class GamePlayScene : MonoBehaviour
 
     }
 
+    // チャージするときの更新処理
+    private void UpdateCharge()
+    {
+        // タイマーが0になったら蹴るフェーズに遷移
+        if (!m_showTimer.IsActive())
+        {
+            m_state = State.Kick;
+        }
+    }
+
     // キックするときの更新処理
     private void UpdateKick()
     {
@@ -69,6 +85,10 @@ public class GamePlayScene : MonoBehaviour
         {
             m_player.Kick();
             m_meteo.Kicked(5.0f);
+            foreach (var planet in m_planets)
+            {
+                planet.Stop();
+            }
             m_state = State.Kicked;
         }
     }
