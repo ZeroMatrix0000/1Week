@@ -10,7 +10,6 @@ public class SceneMove : MonoBehaviour
     // 効果音
     [SerializeField] private AudioClip m_choose;
     [SerializeField] private AudioClip m_decide;
-    [SerializeField] private AudioSource m_audioSource;
 
     // 三角形の場所の設定
     float MoveTriangl = 2.8f;
@@ -33,7 +32,7 @@ public class SceneMove : MonoBehaviour
                 EndGame = false;
                 pos.x = -MoveTriangl;
                 transform.position = pos;
-                m_audioSource.PlayOneShot(m_choose);
+                SoundManager.instance.PlayOneShot(m_choose);
             }
         }
 
@@ -44,7 +43,7 @@ public class SceneMove : MonoBehaviour
                 EndGame = true;
                 pos.x = MoveTriangl;
                 transform.position = pos;
-                m_audioSource.PlayOneShot(m_choose);
+                SoundManager.instance.PlayOneShot(m_choose);
             }
         }
 
@@ -68,7 +67,7 @@ public class SceneMove : MonoBehaviour
         else
         {
             SceneManager.LoadScene("SampleScene");
-            m_audioSource.PlayOneShot(m_decide);
+            SoundManager.instance.PlayOneShot(m_decide);
         }
     }
 

@@ -1,24 +1,26 @@
 using UnityEngine;
-using System.Collections;
 
 public class SoundManager : MonoBehaviour
 {
-    // 破壊しない判定
-    public bool m_dontDestroyEnabled = true;
+    public static AudioSource instance;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if (m_dontDestroyEnabled)
+        if (instance == null)
         {
-            // Sceneを遷移してもオブジェクトが消えないようにする
-            DontDestroyOnLoad(this);
+            instance = GetComponent<AudioSource>();
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 // ゲームプレイシーン
 public class GamePlayScene : MonoBehaviour
@@ -116,7 +117,7 @@ public class GamePlayScene : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             m_player.Kick();
-            m_meteo.Kicked(m_powerGauge.GetPower() / 7.0f);
+            m_meteo.Kicked(m_powerGauge.GetPower() / 8.0f);
             foreach (var planet in m_planets)
             {
                 planet.Stop();
@@ -139,5 +140,9 @@ public class GamePlayScene : MonoBehaviour
     private void UpdateResult()
     {
         //Debug.Log(m_score);
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
     }
 }

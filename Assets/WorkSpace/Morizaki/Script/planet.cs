@@ -27,7 +27,7 @@ public class planet : MonoBehaviour
     {
         if (m_isStoped) return;
 
-        transform.RotateAround(this.sun.transform.position, Vector3.forward, moveSpeed);
+        transform.RotateAround(this.sun.transform.position, Vector3.forward, moveSpeed * Time.deltaTime);
 
 
     }
