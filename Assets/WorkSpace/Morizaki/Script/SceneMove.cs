@@ -7,7 +7,7 @@ public class SceneMove : MonoBehaviour
     static bool EndGame = false;
 
     // 三角形の場所の設定
-    float MoveTriangl = 3.7f;
+    float MoveTriangl = 2.8f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
