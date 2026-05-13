@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - UITable
-  - 
+  - object
   - 
   - 
   - 
@@ -46,6 +46,9 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1381885871
+    locked: 0
+  - name: Object
+    uniqueID: 3607524955
     locked: 0
   m_RenderingLayers:
   - Default
