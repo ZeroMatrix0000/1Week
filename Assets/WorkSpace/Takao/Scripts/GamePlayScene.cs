@@ -29,19 +29,24 @@ public class GamePlayScene : MonoBehaviour
     [SerializeField] private ShowTimer m_showTimer;
     // パワーゲージ
     [SerializeField] private PowerGauge m_powerGauge;
+    // カウントダウン
+    [SerializeField] private CountdownImage m_countDown;
 
     /* メンバ変数 */
 
     // 状態
     private State m_state;
 
+    // 得点
+    int m_score;
+
+
     /* メンバ関数 */
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        m_state = State.Charge;
-        m_showTimer.Activate();
+        m_state = State.CountDown;
     }
 
     // Update is called once per frame
@@ -51,6 +56,7 @@ public class GamePlayScene : MonoBehaviour
         switch (m_state)
         {
             case State.CountDown:
+                UpdateCountDown();
                 break;
             case State.Charge:
                 UpdateCharge();
@@ -62,11 +68,35 @@ public class GamePlayScene : MonoBehaviour
                 UpdateKicked();
                 break;
             case State.Result:
+                UpdateResult();
                 break;
         }
 
         /* テスト */
 
+    }
+
+    // 得点を追加
+    public void AddScore(int score)
+    {
+        m_score += score;
+    }
+
+    // 得点を取得
+    public int GetScore()
+    {
+        return m_score;
+    }
+
+    // カウントダウン中の処理
+    private void UpdateCountDown()
+    {
+        // タイマーが0になったら蹴るフェーズに遷移
+        if (m_countDown.IsStart())
+        {
+            m_state = State.Charge;
+            m_showTimer.Activate();
+        }
     }
 
     // チャージするときの更新処理
@@ -103,5 +133,11 @@ public class GamePlayScene : MonoBehaviour
         {
             m_state = State.Result;
         }
+    }
+
+    // 成績表示時の更新処理
+    private void UpdateResult()
+    {
+        //Debug.Log(m_score);
     }
 }

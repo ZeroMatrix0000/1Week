@@ -4,6 +4,8 @@ public class planet : MonoBehaviour
 {
     // 回転スピード
     [SerializeField] private float moveSpeed = 0.0f;
+    // 得点
+    [SerializeField] private int m_score;
     // 太陽のゲームオブジェクト
     GameObject sun;
 
@@ -36,4 +38,7 @@ public class planet : MonoBehaviour
     {
         m_isStoped = true;
     }
+
+
+    public int GetScore() { return m_score; }
 }

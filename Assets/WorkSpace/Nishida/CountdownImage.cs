@@ -9,8 +9,14 @@ public class CountdownImage : MonoBehaviour
 
     public Sprite[] countdownSprites;
 
+
+    private bool m_isStart;
+
+
     void Start()
     {
+        m_isStart = false;
+
         StartCoroutine(CountdownCoroutine());
     }
 
@@ -20,10 +26,18 @@ public class CountdownImage : MonoBehaviour
         {
             // スプライトを設定
             image.sprite = countdownSprites[i];
+            if (i == 3)
+            {
+                image.rectTransform.sizeDelta = new Vector2(countdownSprites[i].texture.width, countdownSprites[i].texture.height) / 2f;
+            }
+            else
+            {
+                image.rectTransform.sizeDelta = new Vector2(countdownSprites[i].texture.width, countdownSprites[i].texture.height) / 3f;
+            }
 
             // フェードインとフェードアウトを実行
             yield return StartCoroutine(FadeIn());
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.3f);
             yield return StartCoroutine(FadeOut());
         }
 
@@ -31,12 +45,13 @@ public class CountdownImage : MonoBehaviour
         image.gameObject.SetActive(false);
 
         Debug.Log("Game Start!");
+        m_isStart = true;
     }
 
     //フェードイン
     IEnumerator FadeIn()
     {
-        for (float t = 0; t < 1; t += Time.deltaTime * 2)
+        for (float t = 0; t < 1; t += Time.deltaTime / 0.3f)
         {
             canvasGroup.alpha = t;
             yield return null;
@@ -48,12 +63,19 @@ public class CountdownImage : MonoBehaviour
     //フェードアウト
     IEnumerator FadeOut()
     {
-        for (float t = 1; t > 0; t -= Time.deltaTime * 2)
+        for (float t = 1; t > 0; t -= Time.deltaTime / 0.3f)
         {
             canvasGroup.alpha = t;
             yield return null;
         }
 
         canvasGroup.alpha = 0;
+    }
+
+
+    // ゲーム開始したか
+    public bool IsStart()
+    {
+        return m_isStart;
     }
 }

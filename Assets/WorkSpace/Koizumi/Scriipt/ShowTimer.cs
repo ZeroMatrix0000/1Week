@@ -37,12 +37,18 @@ public class ShowTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 残り時間を計算（0以下にならないようClampで制限）
-        float fShowTime = Mathf.Clamp(m_fStartTime - m_gameTimer.CurrentTime, 0f, m_fStartTime);
-        // フォーマットに従って残り時間をテキストに反映
-        m_txt.text = string.Format(m_strFormat, fShowTime);
+        if (!m_isActive)
+        {
+            return;
+        }
 
-        if (fShowTime <= 0f)
+        // 残り時間を計算（0以下にならないようClampで制限）
+        m_fStartTime = Mathf.Clamp(m_fStartTime - Time.deltaTime, 0f, m_fStartTime);
+        //float fShowTime = Mathf.Clamp(m_fStartTime - m_gameTimer.CurrentTime, 0f, m_fStartTime);
+        // フォーマットに従って残り時間をテキストに反映
+        m_txt.text = string.Format(m_strFormat, m_fStartTime);
+
+        if (m_fStartTime <= 0f)
         {
             //m_isZero = true;
             m_isActive = false;
