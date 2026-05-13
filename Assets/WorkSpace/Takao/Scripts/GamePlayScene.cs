@@ -27,6 +27,8 @@ public class GamePlayScene : MonoBehaviour
     [SerializeField] private planet[] m_planets;
     // タイマー
     [SerializeField] private ShowTimer m_showTimer;
+    // パワーゲージ
+    [SerializeField] private PowerGauge m_powerGauge;
 
     /* メンバ変数 */
 
@@ -84,7 +86,7 @@ public class GamePlayScene : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             m_player.Kick();
-            m_meteo.Kicked(5.0f);
+            m_meteo.Kicked(m_powerGauge.GetPower() / 7.0f);
             foreach (var planet in m_planets)
             {
                 planet.Stop();

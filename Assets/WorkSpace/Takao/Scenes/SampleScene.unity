@@ -455,6 +455,7 @@ MonoBehaviour:
   - {fileID: 549978782}
   - {fileID: 97260694}
   m_showTimer: {fileID: 40351542}
+  m_powerGauge: {fileID: 1119526795}
 --- !u!4 &137050369
 Transform:
   m_ObjectHideFlags: 0
@@ -989,6 +990,7 @@ GameObject:
   m_Component:
   - component: {fileID: 763730532}
   - component: {fileID: 763730531}
+  - component: {fileID: 763730534}
   - component: {fileID: 763730533}
   m_Layer: 0
   m_Name: Meteo
@@ -1063,7 +1065,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Meteo
   m_spriteBefore: {fileID: 21300000, guid: 8d8ab1e8762e0b14fb39dec13f8eeadc, type: 3}
   m_spriteAfter: {fileID: 21300000, guid: 9e43b4b440c535a409caf441303ece0b, type: 3}
+  m_explosionPrefab: {fileID: 3374964590123435993, guid: fd3b2a6634718af40b092d3813ef7be9, type: 3}
   m_spriteRenderer: {fileID: 1373282173}
+--- !u!50 &763730534
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763730530}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 7
 --- !u!1 &839737410
 GameObject:
   m_ObjectHideFlags: 0

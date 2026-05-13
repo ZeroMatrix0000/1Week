@@ -26,6 +26,9 @@ public class Meteo : MonoBehaviour
     // 蹴ったあとに表示するオブジェクト
     [SerializeField] private Sprite m_spriteAfter;
 
+    // 爆発エフェクトのプレファブ
+    [SerializeField] private GameObject m_explosionPrefab;
+
     // 子オブジェクトのスプライトレンダラー
     [SerializeField] private SpriteRenderer m_spriteRenderer;
 
@@ -88,10 +91,11 @@ public class Meteo : MonoBehaviour
     // 隕石が止まったか
     public bool IsStopped() { return m_state == State.Stopped; }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (m_state == State.Kicked && collision.CompareTag("Planet"))
         {
+            Instantiate(m_explosionPrefab, collision.transform.position, Quaternion.identity);
             Destroy(collision.gameObject);
         }
     }
