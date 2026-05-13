@@ -8,10 +8,17 @@ public class ExplosionAudio : MonoBehaviour
     // 爆発音オブジェクト
     private GameObject m_explodeAudioObj;
 
+    // オーディオ
+    private AudioSource m_audioSource;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // 進行処理をコルーチンで開始
         StartCoroutine(ProgressCo());
+
+        // オーディオをキャッシュ
+        m_audioSource = m_explodeAudioObj.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -22,8 +29,13 @@ public class ExplosionAudio : MonoBehaviour
 
     private int getSubEmitterParticleNum()
     {
+        // パーティクルの合計数
         int ptNum = 0;
+
+        // 自身と子オブジェクト全てのParticleSystemを取得
         ParticleSystem[] psArr = GetComponentsInChildren<ParticleSystem>();
+       
+        // 各ParticleSystemのパーティクル数を合算
         foreach (ParticleSystem ps in psArr)
         {
             ptNum += ps.particleCount;
@@ -31,6 +43,7 @@ public class ExplosionAudio : MonoBehaviour
         return ptNum;
     }
 
+    // 爆発の進行を管理するコルーチン
     IEnumerator ProgressCo()
     {
       
@@ -39,9 +52,17 @@ public class ExplosionAudio : MonoBehaviour
         {
             yield return null;
         }
-        // 爆発音
-        m_explodeAudioObj.GetComponent<AudioSource>().pitch *= Random.Range(0.8f, 1.2f);
-        m_explodeAudioObj.GetComponent<AudioSource>().Play();
+        // ピッチをランダムに変化させて毎回異なる音程で再生
+        m_audioSource.pitch *= Random.Range(0.8f, 1.2f);
+        // 爆発音を再生
+        m_audioSource.Play();
+
+        // 再生が終わるまで待機
+        while (m_audioSource.isPlaying)
+        {
+            yield return null;
+        }
+
         // 消滅待ち
         while (getSubEmitterParticleNum() > 0)
         {
