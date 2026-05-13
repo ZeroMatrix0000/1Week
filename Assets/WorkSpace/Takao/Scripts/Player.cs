@@ -34,6 +34,7 @@ public class Player : MonoBehaviour
     public void Kick()
     {
         m_spriteRenderer.sprite = m_spriteAfter;
+        GetComponent<AudioSource>().Play();
     }
 
 }

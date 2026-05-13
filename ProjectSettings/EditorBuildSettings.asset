@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/WorkSpace/Morizaki/TitleScene.unity
+    guid: 28fd44262b59d804aaa1546f2ee3afc6
+  - enabled: 1
     path: Assets/WorkSpace/Takao/Scenes/SampleScene.unity
     guid: 603815dd227e9c440bf3212029e5694b
   m_configObjects:
