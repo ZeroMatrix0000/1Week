@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 // ゲームプレイシーン
 public class GamePlayScene : MonoBehaviour
@@ -137,7 +136,7 @@ public class GamePlayScene : MonoBehaviour
             m_state = State.Result;
 
             m_result.gameObject.SetActive(true);
-        
+
             // スコア渡す
             m_result.SetScore(m_score);
         }
@@ -147,11 +146,11 @@ public class GamePlayScene : MonoBehaviour
     private void UpdateResult()
     {
         //Debug.Log(m_score);
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene("TitleScene");
-        }
+        //if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        //{
+        //    SceneManager.LoadScene("TitleScene");
+        //}
         //ここにリザルトのアップデートを呼ぶ
-            //m_result.Update();
+        //m_result.Update();
     }
 }
