@@ -32,7 +32,9 @@ public class GamePlayScene : MonoBehaviour
     [SerializeField] private PowerGauge m_powerGauge;
     // カウントダウン
     [SerializeField] private CountdownImage m_countDown;
-
+    //-----追加変数(リザルト)西田-----//
+    // リザルト
+    [SerializeField] private Result m_result;
     /* メンバ変数 */
 
     // 状態
@@ -133,6 +135,8 @@ public class GamePlayScene : MonoBehaviour
         if (m_meteo.IsStopped())
         {
             m_state = State.Result;
+
+            m_result.gameObject.SetActive(true);
         }
     }
 
@@ -144,5 +148,7 @@ public class GamePlayScene : MonoBehaviour
         {
             SceneManager.LoadScene("TitleScene");
         }
+        //ここにリザルトのアップデートを呼ぶ
+            //m_result.Update();
     }
 }
