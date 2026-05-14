@@ -78,11 +78,11 @@ public class Result : MonoBehaviour
     void OnGUI()
 {
     GUIStyle style = new GUIStyle();
-    style.fontSize = 50;
+    style.fontSize = 200;
     style.normal.textColor = Color.white;
 
     GUI.Label(
-        new Rect(10, 10, 400, 100),
+        new Rect(300, 300, 400, 100),
         "Score : " + m_score.ToString("F2"),
         style
     );
