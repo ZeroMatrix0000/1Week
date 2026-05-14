@@ -137,6 +137,9 @@ public class GamePlayScene : MonoBehaviour
             m_state = State.Result;
 
             m_result.gameObject.SetActive(true);
+        
+            // スコア渡す
+            m_result.SetScore(m_score);
         }
     }
 

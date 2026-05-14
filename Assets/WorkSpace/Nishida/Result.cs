@@ -15,6 +15,7 @@ public class Result : MonoBehaviour
     [SerializeField] private GameObject m_triangle;
     float MoveTriangl = 2.8f;
 
+    int m_score;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -69,4 +70,21 @@ public class Result : MonoBehaviour
             SoundManager.instance.PlayOneShot(m_decide);
         }
     }
+    public void SetScore(int score)
+    {
+        m_score = score;
+    }
+
+    void OnGUI()
+{
+    GUIStyle style = new GUIStyle();
+    style.fontSize = 50;
+    style.normal.textColor = Color.white;
+
+    GUI.Label(
+        new Rect(10, 10, 400, 100),
+        "Score : " + m_score.ToString("F2"),
+        style
+    );
+}
 }
